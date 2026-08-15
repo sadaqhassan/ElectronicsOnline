@@ -7,7 +7,7 @@ const Nav = () => {
         <nav className="flex space-x-10 font-medium items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
 
             <div>
-                <p className="font-bold text-green-600 px-2 py-2">SamoElectronics</p>
+                <p className="font-bold text-xl text-green-600 px-2 py-2">Samo<br/>Electronics</p>
             </div>
 
             {/* Desktop Menu */}
@@ -48,7 +48,7 @@ const Nav = () => {
             {/* Mobile Menu */}
             <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
                 <Link to={'/'}  className="block">Home</Link>
-                <Link to={'/'}  className="block">Products</Link>
+                <Link to={'/products'}  className="block">Products</Link>
                 <Link to={'/'}  className="block">Contact</Link>
                 <button className="cursor-pointer px-6 py-2 mt-2 bg-green-600 hover:bg-green-400 transition text-white rounded-full text-sm">
                     Login
