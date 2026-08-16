@@ -2,9 +2,10 @@ import React from 'react'
 import { useApp } from '../context/AppContext'
 
 const ProductCard = ({product}) => {
-  const { addToCart } = useApp()
+  const {navigate ,addToCart } = useApp()
+  
   return (
-            <div className="flex flex-col bg-white shadow-md  rounded-xl w-full my-4">
+            <div onClick={()=>{navigate(`/product-detail/${product.id}`)}} className="flex flex-col bg-white shadow-md  rounded-xl w-full my-4">
               <div className='justify-center flex flex-col items-center'>
                 <img className='w-full h-40 object-cover'
                     src={product.thumbnail}
