@@ -1,32 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../Components/ProductCard';
+import { useApp } from '../context/AppContext';
+import SkeletonLoading from '../Components/SkeletonLoading';
 
 const Products = () => {
-    const [products ,setProducts] = useState([])
-    const fetchProducts = async ()=>{
-      const res = await fetch('https://dummyjson.com/products');
-      let data = await res.json();
-      setProducts(data.products);
-    }
-
-    console.log(products)
-
-    useEffect(()=>{
-        if(products){
-         fetchProducts()   
-        }
-    },[]);
-
+   const {products} = useApp()
 
   return (
-    <div className='grid grid-cols-2 gap-6 mt-10 md:grid-cols-4 '>
+    <div className='grid grid-cols-2 gap-3 mt-10 md:grid-cols-3 '>
       {
-       
+    products.length > 0 ?
         products.map((product)=>(
             <div key={product.id}>
                 <ProductCard product={product}/>
             </div>
-        ))
+        )) : 
+         Array(9).fill().map((_,index)=>(
+            <SkeletonLoading key={index}/>
+         ))
       }
     </div>
   )
