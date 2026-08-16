@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
-    
+
+    const navigate = useNavigate()
+
     const [products ,setProducts] = useState([])
     const fetchProducts = async ()=>{
       const res = await fetch('https://dummyjson.com/products');
@@ -16,7 +19,12 @@ export const AppContextProvider = ({children}) => {
     },[]);
 
     const [cart, setCart] = useState([]);
+    const [productDetail, setProductDetail] = useState({});
+    
 
+
+
+    
     // addoCart
     const addToCart = (productId)=>{
         let cartProduct = products.find((pro)=>pro.id === productId)
@@ -33,7 +41,9 @@ export const AppContextProvider = ({children}) => {
 
     const value = {
         cart,setCart,
-        addToCart,products
+        addToCart,products,
+        productDetail, setProductDetail,
+        navigate
     }
 return (
     <AppContext.Provider value={value}>
