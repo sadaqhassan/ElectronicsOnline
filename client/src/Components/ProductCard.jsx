@@ -1,22 +1,24 @@
 import React from 'react'
+import { useApp } from '../context/AppContext'
 
 const ProductCard = ({product}) => {
+  const { addToCart } = useApp()
   return (
-            <div className="flex flex-col bg-white shadow-md  rounded-xl md:w-60 my-4">
+            <div className="flex flex-col bg-white shadow-md  rounded-xl w-full my-4">
               <div className='justify-center flex flex-col items-center'>
-                <img className='  w-40 h-40 object-cover'
+                <img className='w-full h-40 object-cover'
                     src={product.thumbnail}
                     alt="image" />
-                    </div>
+                </div>
                 <div className="p-4 text-sm">
-                    <p className="text-slate-600 font-bold">${product.price}</p>
-                    <p className="text-slate-800 text-base font-medium my-1.5">{product.name}</p>
-                    <p className="text-slate-500">{product.description.slice(1,60)}...</p>
+                    <p className="text-slate-600 font-bold">${product.price.toFixed()}</p>
+                    <p className="text-slate-800 text-base font-medium my-1.5">{product.title}</p>
+                    <p className="text-slate-500 text-xs">{product.description.slice(0,60)}...</p>
                     <div className="grid grid-cols-2 gap-2 mt-3">
-                        <button className="bg-slate-100 text-slate-600 rounded py-2">
+                        <button  onClick={()=>addToCart(product.id)} className="bg-slate-100 text-slate-600 rounded py-2">
                             Add to cart
                         </button>
-                        <button className="bg-green-600 text-white py-2">
+                        <button  className="bg-green-600 text-white py-2">
                             Buy now
                         </button>
                     </div>
