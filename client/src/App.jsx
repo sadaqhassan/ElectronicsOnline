@@ -9,7 +9,7 @@ import Products from './Pages/Products'
 function App() {
 
   return (
-    <div className='mx-10 md:mx-20'>
+    <div className='mx-10 md:mx-30'>
      <Nav/>
 
      <Routes>
