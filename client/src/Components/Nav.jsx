@@ -7,7 +7,7 @@ const Nav = () => {
         <nav className="flex space-x-10 font-medium items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
 
             <div>
-                <p className="font-bold text-xl text-green-600 px-2 py-2">Samo<br/>Electronics</p>
+                <p className="font-bold text-sm text-green-600 px-2 py-2">Samo<br/>Electronics</p>
             </div>
 
             {/* Desktop Menu */}
