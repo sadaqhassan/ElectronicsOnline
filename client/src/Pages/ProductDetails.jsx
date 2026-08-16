@@ -60,8 +60,8 @@ function ProductDetails() {
                     </div>
 
                     <div className="mt-6">
-                        <p className="text-gray-500/70 line-through">MRP: ${productDetail.price}</p>
-                        <p className="text-2xl font-medium">MRP: ${productDetail.offerPrice}</p>
+                        <p className="text-gray-500/70 line-through">Old price: ${productDetail.price + 60}</p>
+                        <p className="text-2xl font-medium">Price ${productDetail.price || 0}</p>
                         <span className="text-gray-500/70">(inclusive of all taxes)</span>
                     </div>
 
