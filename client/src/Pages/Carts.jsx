@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useApp } from '../context/AppContext'
+import { MinusIcon, MinusSquare, MinusSquareIcon, Plus, PlusSquareIcon } from 'lucide-react';
 
 const Carts = () => {
-  const {products} = useApp();
+
+  const {carts,totalPrice,decreaseQuantity,increaseQuantity} = useApp();
+  
+
   const [showAddress,setShowAddress] = useState(false)
+
 
   return (
         <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
             <div className='flex-1 max-w-4xl'>
                 <h1 className="text-3xl font-medium mb-6">
-                    Shopping Cart <span className="text-sm text-black">3 Items</span>
+                    Shopping Cart <span className="text-sm text-black">{carts.length} Items</span>
                 </h1>
 
                 <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
@@ -18,28 +23,27 @@ const Carts = () => {
                     <p className="text-center">Action</p>
                 </div>
 
-                {products?.map((product, index) => (
+                {carts?.map((product, index) => (
                     <div key={index} className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 items-center text-sm md:text-base font-medium pt-3">
                         <div className="flex items-center md:gap-6 gap-3">
                             <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
-                                <img className="max-w-full h-full object-cover" src={product.image} alt={product.name} />
+                                <img className="max-w-full h-full object-cover" src={product.thumbnail} alt={product.name} />
                             </div>
                             <div>
                                 <p className="hidden md:block font-semibold">{product.name}</p>
                                 <div className="font-normal text-gray-500/70">
                                     <p>Size: <span>{product.size || "N/A"}</span></p>
                                     <div className='flex items-center'>
-                                        <p>Qty:</p>
-                                        <select className='outline-none'>
-                                            {Array(5).fill('').map((_, index) => (
-                                                <option key={index} value={index + 1}>{index + 1}</option>
-                                            ))}
-                                        </select>
+                                        <p className={`${product.quantity > 9 ? "text-xs" : "text-medium"}`}>Qty: {product.quantity}</p>
+                                        <div className='flex space-x-2 ml-3'>
+                                            <button onClick={()=>increaseQuantity(product.id)}  className='p-2'><PlusSquareIcon/></button>
+                                            <button onClick={()=>decreaseQuantity(product.id)}  className='p-2'><MinusSquareIcon/></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <p className="text-center">${product.offerPrice * product.quantity}</p>
+                        <p className="text-center">${product.price * product.quantity }</p>
                         <button className="cursor-pointer mx-auto">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m12.5 7.5-5 5m0-5 5 5m5.833-2.5a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0" stroke="#FF532E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -92,16 +96,16 @@ const Carts = () => {
 
                 <div className="text-gray-500 mt-4 space-y-2">
                     <p className="flex justify-between">
-                        <span>Price</span><span>$20</span>
+                        <span>Price</span><span>{totalPrice}</span>
                     </p>
                     <p className="flex justify-between">
                         <span>Shipping Fee</span><span className="text-green-600">Free</span>
                     </p>
                     <p className="flex justify-between">
-                        <span>Tax (2%)</span><span>$20</span>
+                        <span>Tax (2%)</span><span>$5</span>
                     </p>
                     <p className="flex justify-between text-lg font-medium mt-3">
-                        <span>Total Amount:</span><span>$20</span>
+                        <span>Total Amount:</span><span>{totalPrice + 5}</span>
                     </p>
                 </div>
 
