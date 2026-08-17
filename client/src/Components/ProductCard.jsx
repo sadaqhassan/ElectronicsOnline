@@ -16,7 +16,7 @@ const ProductCard = ({product}) => {
                     <p className="text-slate-800 text-base font-medium my-1.5">{product.title}</p>
                     <p className="text-slate-500 text-xs">{product.description.slice(0,60)}...</p>
                     <div className="grid grid-cols-2 gap-2 mt-3">
-                        <button  onClick={()=>addToCart(product.id)} className="bg-slate-100 text-slate-600 rounded py-2">
+                        <button  onClick={()=>addToCart(product)} className="bg-slate-100 text-slate-600 rounded py-2">
                             Add to cart
                         </button>
                         <button  className="bg-green-600 text-white py-2">
