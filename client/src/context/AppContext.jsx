@@ -18,29 +18,47 @@ export const AppContextProvider = ({children}) => {
          fetchProducts()
     },[]);
 
-    const [cart, setCart] = useState([]);
+    const [carts, setCart] = useState([]);
     const [productDetail, setProductDetail] = useState({});
     
 
 
 
     
-    // addoCart
-    const addToCart = (productId)=>{
-        let cartProduct = products.find((pro)=>pro.id === productId)
-        let duplicate ;
-        if( cart.length > 0){
-            duplicate = cart.find((pro)=>pro.id === productId)  
-        }
-        if(duplicate){
-            return alert('alrady added')
-        }
-        setCart(cartProduct);
-        console.log(cart);
+//    addToCArtt
+const addToCart = (product) => {
+    const isExist = carts.find(
+        (item) => item.id === product.id
+    );
+
+    if (isExist) {
+        setCart((prev) =>
+            prev.map((item) =>
+                item.id === product.id
+                    ? {
+                        ...item,
+                        quantity: item.quantity + 1
+                    }
+                    : item
+            )
+        );
+    } else {
+        setCart((prev) => [
+            ...prev,
+            {
+                ...product,
+                quantity: 1
+            }
+        ]);
     }
+};
+
+    useEffect(()=>{
+        console.log(carts)
+    },[carts])
 
     const value = {
-        cart,setCart,
+        carts,setCart,
         addToCart,products,
         productDetail, setProductDetail,
         navigate
