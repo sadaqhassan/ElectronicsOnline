@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const AppContext = createContext();
@@ -7,7 +8,8 @@ export const AppContextProvider = ({children}) => {
 
     const navigate = useNavigate()
 
-    const [products ,setProducts] = useState([])
+    const [products ,setProducts] = useState([]);
+
     const fetchProducts = async ()=>{
       const res = await fetch('https://dummyjson.com/products');
       let data = await res.json();
@@ -19,10 +21,9 @@ export const AppContextProvider = ({children}) => {
     },[]);
 
     const [carts, setCart] = useState([]);
+    
     const [productDetail, setProductDetail] = useState({});
     
-
-
 
     
 //    addToCArtt
@@ -51,7 +52,43 @@ const addToCart = (product) => {
             }
         ]);
     }
+    toast.success("Added to Cart")
 };
+
+const totalPrice = carts?.length > 0 && carts.reduce((total,item)=> total + item.price * item.quantity , 0) ;
+
+
+//increesquantity
+const increaseQuantity = (id) => {
+    setCart((prev) =>
+        prev.map((item) =>
+            item.id === id
+                ? {
+                    ...item,
+                    quantity: item.quantity + 1
+                }
+                : item
+        )
+    );
+};
+
+
+
+const decreaseQuantity = (id) => {
+    setCart((prev) =>
+        prev.map((item) =>
+            item.id === id
+                ? {
+                    ...item,
+                    quantity: item.quantity > 1
+                        ? item.quantity - 1
+                        : 1
+                }
+                : item
+        )
+    );
+};
+
 
     useEffect(()=>{
         console.log(carts)
@@ -61,7 +98,7 @@ const addToCart = (product) => {
         carts,setCart,
         addToCart,products,
         productDetail, setProductDetail,
-        navigate
+        navigate,totalPrice,increaseQuantity ,decreaseQuantity
     }
 return (
     <AppContext.Provider value={value}>
