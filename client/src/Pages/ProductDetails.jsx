@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useApp } from '../context/AppContext'
 import { useParams } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 
 function ProductDetails() {
-  const { products } = useApp()
+  const { products , navigate} = useApp()
 
     const prams = useParams()
     const productId = prams?.id
@@ -21,8 +22,7 @@ function ProductDetails() {
     return productDetail && (
         <div className="max-w-6xl w-full px-6 py-5">
             <p>
-                <span>Home</span> 
-                <span> Products</span> 
+                <button  className='flex px-2 font-bold text-md bg-gray-200 p-2 rounded cursor-pointer my-2' onClick={()=>navigate('/')}><ArrowLeft/> Back</button> 
                 <span> {productDetail?.category}</span> 
                 <span className="text-green-600"> {productDetail.title}</span>
             </p>
