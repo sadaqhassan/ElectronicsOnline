@@ -7,6 +7,7 @@ import Home from './Pages/Home'
 import Products from './Pages/Products'
 import ProductDetails from './Pages/ProductDetails'
 import Carts from './Pages/Carts'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const [isDetailPage,setIsDetailPage] = useState(false)
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className='mx-10 md:mx-30'>
+      {<Toaster/>}
      <Nav/>
 
      <Routes>
