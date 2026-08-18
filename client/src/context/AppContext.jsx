@@ -71,6 +71,22 @@ const removeItem = (productId)=>{
 
 const totalPrice = carts?.length > 0 && carts.reduce((total,item)=> total + item.price * item.quantity , 0) ;
 
+const [searchQuery,setSearchQuery] = useState("")
+
+//search
+
+const [ searchedProducts ,setSearchedProduct ]= useState([]);
+
+useEffect(()=>{
+    if(searchQuery){
+        setSearchedProduct(
+            products.filter((items)=>items.title.toLowerCase().startsWith(searchQuery.toLowerCase()))
+        )
+    }else{
+        setSearchedProduct([])
+        setSearchQuery("")
+    }
+},[searchQuery])
 
 //increesquantity
 const increaseQuantity = (id) => {
@@ -109,7 +125,7 @@ const decreaseQuantity = (id) => {
         addToCart,products,
         productDetail, setProductDetail,
         navigate,totalPrice,increaseQuantity ,decreaseQuantity
-        ,removeItem
+        ,removeItem,searchedProducts,searchQuery,setSearchQuery
     }
 return (
     <AppContext.Provider value={value}>
