@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useApp } from '../context/AppContext'
-import { MinusIcon, MinusSquare, MinusSquareIcon, Plus, PlusSquareIcon } from 'lucide-react';
+import { ArrowBigLeft, MinusIcon, MinusSquare, MinusSquareIcon, Plus, PlusSquareIcon, Trash } from 'lucide-react';
 
 const Carts = () => {
 
-  const {carts,totalPrice,navigate,decreaseQuantity,increaseQuantity} = useApp();
+  const {carts,totalPrice,removeItem,navigate,decreaseQuantity,increaseQuantity} = useApp();
   
 
   const [showAddress,setShowAddress] = useState(false)
@@ -14,7 +14,7 @@ const Carts = () => {
         <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
             <div className='flex-1 max-w-4xl'>
                 <h1 className="text-3xl font-medium mb-6">
-                    Shopping Cart <span className="text-sm text-black">{carts.length} Items</span>
+                    Shopping Cart <span className="text-sm text-black">{carts?.length > 0 ? carts.length : 0 } Items</span>
                 </h1>
 
                 <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
@@ -44,18 +44,14 @@ const Carts = () => {
                             </div>
                         </div>
                         <p className="text-center">${product.price * product.quantity }</p>
-                        <button className="cursor-pointer mx-auto">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m12.5 7.5-5 5m0-5 5 5m5.833-2.5a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0" stroke="#FF532E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
+                        <button onClick={()=>removeItem(product.id)} className="cursor-pointer mx-auto">
+                            <Trash className='text-red-500 font-bold'/>
                         </button>
                     </div>)
                 )}
 
                 <button onClick={()=>navigate('/products')} className="group cursor-pointer flex items-center mt-8 gap-2 text-black font-medium">
-                    <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1" stroke="#615fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <ArrowBigLeft className='text-green-600'/>
                     Continue Shopping
                 </button>
 
@@ -109,7 +105,7 @@ const Carts = () => {
                     </p>
                 </div>
 
-                <button className="w-full py-3 mt-6 cursor-pointer bg-black text-white font-medium hover:bg-indigo-600 transition">
+                <button className="w-full py-3 mt-6 cursor-pointer bg-green-600 text-white font-medium hover:bg-green-500 transition">
                     Place Order
                 </button>
             </div>
