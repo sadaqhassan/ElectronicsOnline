@@ -62,8 +62,9 @@ const removeItem = (productId)=>{
         .map((item)=>
             item.id === productId ?
             {...item , quantity : item.quantity - 1} :
-            
+
             item
+
         )
         .filter((item)=>item.quantity > 0)
     )
@@ -72,6 +73,7 @@ const removeItem = (productId)=>{
 const totalPrice = carts?.length > 0 && carts.reduce((total,item)=> total + item.price * item.quantity , 0) ;
 
 const [searchQuery,setSearchQuery] = useState("")
+
 
 //search
 
