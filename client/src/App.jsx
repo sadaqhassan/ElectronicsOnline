@@ -13,7 +13,7 @@ function App() {
   const [isDetailPage,setIsDetailPage] = useState(false)
   const location = useLocation()
   useEffect(()=>{
-    let params = location.pathname.includes('detail')
+    let params = location.pathname.includes('detail') || location.pathname.includes('carts')
     if(params){
       setIsDetailPage(true)
     }else{
