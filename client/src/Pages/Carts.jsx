@@ -4,7 +4,7 @@ import { MinusIcon, MinusSquare, MinusSquareIcon, Plus, PlusSquareIcon } from 'l
 
 const Carts = () => {
 
-  const {carts,totalPrice,decreaseQuantity,increaseQuantity} = useApp();
+  const {carts,totalPrice,navigate,decreaseQuantity,increaseQuantity} = useApp();
   
 
   const [showAddress,setShowAddress] = useState(false)
@@ -52,7 +52,7 @@ const Carts = () => {
                     </div>)
                 )}
 
-                <button className="group cursor-pointer flex items-center mt-8 gap-2 text-black font-medium">
+                <button onClick={()=>navigate('/products')} className="group cursor-pointer flex items-center mt-8 gap-2 text-black font-medium">
                     <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1" stroke="#615fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
