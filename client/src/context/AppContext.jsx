@@ -28,7 +28,7 @@ export const AppContextProvider = ({children}) => {
     
 //    addToCArtt
 const addToCart = (product) => {
-    const isExist = carts.find(
+    const isExist = carts?.find(
         (item) => item.id === product.id
     );
 
@@ -54,6 +54,20 @@ const addToCart = (product) => {
     }
     toast.success("Added to Cart")
 };
+
+//remove from cart 
+const removeItem = (productId)=>{
+    setCart((prev)=>
+        prev
+        .map((item)=>
+            item.id === productId ?
+            {...item , quantity : item.quantity - 1} :
+            
+            item
+        )
+        .filter((item)=>item.quantity > 0)
+    )
+}
 
 const totalPrice = carts?.length > 0 && carts.reduce((total,item)=> total + item.price * item.quantity , 0) ;
 
@@ -90,15 +104,12 @@ const decreaseQuantity = (id) => {
 };
 
 
-    useEffect(()=>{
-        console.log(carts)
-    },[carts])
-
     const value = {
         carts,setCart,
         addToCart,products,
         productDetail, setProductDetail,
         navigate,totalPrice,increaseQuantity ,decreaseQuantity
+        ,removeItem
     }
 return (
     <AppContext.Provider value={value}>
