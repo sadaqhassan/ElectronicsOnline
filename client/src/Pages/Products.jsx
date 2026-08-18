@@ -4,11 +4,17 @@ import { useApp } from '../context/AppContext';
 import SkeletonLoading from '../Components/SkeletonLoading';
 
 const Products = () => {
-   const {products} = useApp()
+   const {products,searchedProducts} = useApp()
 
   return (
     <div className='grid grid-cols-2 gap-3 mt-10 md:grid-cols-3 '>
-      {
+    {
+    searchedProducts.length > 0 ? 
+    searchedProducts.map((product)=>(
+            <div key={product.id}>
+                <ProductCard product={product}/>
+            </div>
+      )) :
     products.length > 0 ?
         products.map((product)=>(
             <div key={product.id}>
