@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 
 function ProductDetails() {
-  const { products , navigate} = useApp()
+  const { products,addToCart , navigate} = useApp()
 
     const prams = useParams()
     const productId = prams?.id
@@ -70,7 +70,7 @@ function ProductDetails() {
                         {productDetail.description}
                     </ul>
                     <div className="flex items-center mt-10 gap-4 text-base">
-                        <button className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 " >
+                        <button onClick={()=>addToCart(product)} className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 " >
                             Add to Cart
                         </button>
                         <button className="w-full py-3.5 cursor-pointer font-medium bg-green-600 text-white hover:bg-green-400 " >
