@@ -2,7 +2,7 @@ import React from 'react'
 import { useApp } from '../context/AppContext'
 
 const ProductCard = ({product}) => {
-  const {navigate ,addToCart } = useApp()
+  const {navigate ,addToCart} = useApp()
   
   return (
             <div className="flex flex-col bg-white shadow-md  rounded-xl w-full my-4">
